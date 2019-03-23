@@ -26,16 +26,27 @@
             <label class="active" for="hp">No.HP</label>
         </div>
 
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
+        <button id="btn_input" class="btn waves-effect waves-light" type="submit" name="action">
+            Input
         </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
+        <button id="btn_display" class="btn waves-effect waves-light" type="submit" name="action">
+            Display Data
         </button>
-            <a class="waves-effect waves-light btn-small">
-            <i class="material-icons right">cloud</i>display data
-        </a>
     </div>
+
+    <?php
+        if($_GET['btn_input']){input();}
+        if($_GET['btn_display']){display();}
+
+        function input()
+        {
+            echo $_GET['nama'];
+        }
+        function display()
+        {
+        //This function will update some column in database to 2
+        }
+    ?>
     
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
