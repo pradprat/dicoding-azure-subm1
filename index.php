@@ -17,6 +17,14 @@
             <input id="first_name2" type="text" class="validate">
             <label class="active" for="first_name2">Nama</label>
         </div>
+        <div class="input-field col s6">
+            <input id="first_name2" type="text" class="validate">
+            <label class="active" for="first_name2">NIM</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="first_name2" type="text" class="validate">
+            <label class="active" for="first_name2">Nama</label>
+        </div>
     </div>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
