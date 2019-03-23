@@ -37,18 +37,8 @@
     <div>
     </div>
 
-    <?php
-        if($_GET['btn_input']){input();}
-        if($_GET['btn_display']){display();}
-
-        function input()
-        {
+    <?php 
             echo "hai";
-        }
-        function display()
-        {
-        //This function will update some column in database to 2
-        }
     ?>
 
     <!-- Compiled and minified JavaScript -->
