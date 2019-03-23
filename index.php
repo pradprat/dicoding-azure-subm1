@@ -6,28 +6,26 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     </head>
 <body>
     <h1>hello</h1>
-    <div class="row">
-        <div class="input-field col s6">
-            <input id="first_name2" type="text" class="validate">
-            <label class="active" for="first_name2">Nama</label>
-        </div>
-        <div class="input-field col s6">
-            <input id="first_name2" type="text" class="validate">
-            <label class="active" for="first_name2">NIM</label>
-        </div>
-        <div class="input-field col s6">
-            <input id="first_name2" type="text" class="validate">
-            <label class="active" for="first_name2">Nama</label>
-        </div>
+    <div class="input-field col s6">
+        <input id="nama" type="text" class="validate">
+        <label class="active" for="nama">Nama</label>
+    </div>
+    <div class="input-field col s6">
+        <input id="nim" type="text" class="validate">
+        <label class="active" for="nim">NIM</label>
+    </div>
+    <div class="input-field col s6">
+        <input id="hp" type="text" class="validate">
+        <label class="active" for="hp">No.HP</label>
     </div>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="main.js"></script>
 
 </body>
 </html>
