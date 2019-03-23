@@ -1,49 +1,89 @@
-
-<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    </head>
-<body>
-    <div class="container">
-        <h1>hello</h1>
+ <head>
+ <Title>Registration Form</Title>
+ <style type="text/css">
+ 	body { background-color: #fff; border-top: solid 10px #000;
+ 	    color: #333; font-size: .85em; margin: 20; padding: 20;
+ 	    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+ 	}
+ 	h1, h2, h3,{ color: #000; margin-bottom: 0; padding-bottom: 0; }
+ 	h1 { font-size: 2em; }
+ 	h2 { font-size: 1.75em; }
+ 	h3 { font-size: 1.2em; }
+ 	table { margin-top: 0.75em; }
+ 	th { font-size: 1.2em; text-align: left; border: none; padding-left: 0; }
+ 	td { padding: 0.25em 2em 0.25em 0em; border: 0 none; }
+ </style>
+ </head>
+ <body>
+ <h1>Register here!</h1>
+ <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
+ <form method="post" action="index.php" enctype="multipart/form-data" >
+       Name  <input type="text" name="name" id="name"/><br><br>
+       Email <input type="text" name="email" id="email"/><br><br>
+       Job <input type="text" name="job" id="job"/><br><br>
+       <input type="submit" name="submit" value="Submit" />
+       <input type="submit" name="load_data" value="Load Data" />
+ </form>
+ <?php
+    $host = "pradd.database.windows.net";
+    $user = "pradika2019";
+    $pass = "Dicoding123";
+    $db = "dicoding-azure-subm1";
 
-        <div class="input-field col s6">
-            <input id="nama" type="text" class="validate">
-            <label class="active" for="nama">Nama</label>
-        </div>
-        <div class="input-field col s6">
-            <input id="nim" type="text" class="validate">
-            <label class="active" for="nim">NIM</label>
-        </div>
-        <div class="input-field col s6">
-            <input id="hp" type="text" class="validate">
-            <label class="active" for="hp">No.HP</label>
-        </div>
+    try {
+        $conn = new PDO("sqlsrv:server = $host; Database = $db", $user, $pass);
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    } catch(Exception $e) {
+        echo "Failed: " . $e;
+    }
 
-        <button id="btn_input" class="btn waves-effect waves-light" type="submit" name="action">
-            Input
-        </button>
-        <button id="btn_display" class="btn waves-effect waves-light" type="submit" name="action">
-            Display Data
-        </button>
-    </div>
-    <div>
-    </div>
+    if (isset($_POST['submit'])) {
+        try {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $job = $_POST['job'];
+            $date = date("Y-m-d");
+            // Insert data
+            $sql_insert = "INSERT INTO Registration (name, email, job, date) 
+                        VALUES (?,?,?,?)";
+            $stmt = $conn->prepare($sql_insert);
+            $stmt->bindValue(1, $name);
+            $stmt->bindValue(2, $email);
+            $stmt->bindValue(3, $job);
+            $stmt->bindValue(4, $date);
+            $stmt->execute();
+        } catch(Exception $e) {
+            echo "Failed: " . $e;
+        }
 
-    <?php 
-            echo "hai";
-    ?>
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="main.js"></script>
-
-</body>
-</html>
+        echo "<h3>Your're registered!</h3>";
+    } else if (isset($_POST['load_data'])) {
+        try {
+            $sql_select = "SELECT * FROM Registration";
+            $stmt = $conn->query($sql_select);
+            $registrants = $stmt->fetchAll(); 
+            if(count($registrants) > 0) {
+                echo "<h2>People who are registered:</h2>";
+                echo "<table>";
+                echo "<tr><th>Name</th>";
+                echo "<th>Email</th>";
+                echo "<th>Job</th>";
+                echo "<th>Date</th></tr>";
+                foreach($registrants as $registrant) {
+                    echo "<tr><td>".$registrant['name']."</td>";
+                    echo "<td>".$registrant['email']."</td>";
+                    echo "<td>".$registrant['job']."</td>";
+                    echo "<td>".$registrant['date']."</td></tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "<h3>No one is currently registered.</h3>";
+            }
+        } catch(Exception $e) {
+            echo "Failed: " . $e;
+        }
+    }
+ ?>
+ </body>
+ </html>
